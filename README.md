@@ -1,3 +1,3 @@
-#zombulator
+# Zombulator
 
 by Kai Brooks
