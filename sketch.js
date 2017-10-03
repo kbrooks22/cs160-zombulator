@@ -10,3 +10,12 @@ function draw() {
   fill(150, 30, 30)
   ellipse(200, 100, 80, 80);
 }
+
+function draw() {
+	if (MouseIsPressed) {
+		fill(0);
+	}else{
+		fill(255);
+	}
+	ellipse(mouseX, mouseY, 20,20);
+}
