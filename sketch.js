@@ -20,6 +20,9 @@ function draw() {
 if (zombie2 >= 800 ) {
 		zombie2 = 0; 
 if (zombiex >= 400) {
-	zombiex = 0; 
+	zombiex = zombiex - 1; 
+}
+if (zombiex <= 0) {
+	zombiex = zombiex + 1;
 }
 	}}
