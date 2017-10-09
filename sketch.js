@@ -1,10 +1,10 @@
 // Zombulator by Kai Brooks
 
-var zombiex = 80; 
-var zombie2 = 200; 
+var zombiex = 8; 
+var zombie2 = 2; 
 
 function setup() {
-	createCanvas(800, 800);
+	createCanvas(800, 800); 
 }
 
 function draw() {
@@ -18,11 +18,13 @@ function draw() {
 	zombiex = zombiex + 1; 
 	zombie2 = zombie2 + 6; 
 if (zombie2 >= 800 ) {
-		zombie2 = 0; 
-if (zombiex >= 400) {
+	zombie2 = 0; 
+	}
+if (zombiex >= 400 ) {
 	zombiex = zombiex - 1; 
 }
-if (zombiex <= 0) {
+if (zombiex <= 10 ) {
 	zombiex = zombiex + 1;
 }
-	}}
+	}
+
