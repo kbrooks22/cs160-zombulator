@@ -1,30 +1,31 @@
 // Zombulator by Kai Brooks
 
-var zombiex = 8; 
-var zombie2 = 2; 
+var zombieY = 15;
+var zombieV = 0;
+var zombieA = 0.2;
+var zombieDamping = -0.8;
+var zombieColor;
+var backgroundColor; 
+var zombiesize = 80; 
 
 function setup() {
-	createCanvas(800, 800); 
+	createCanvas(windowWidth , windowHeight);
+	backgroundColor = color(random(255), random(255), random(255));
+	zombieColor = color(255, 255, 255);
 }
 
 function draw() {
-	background(255, 255, 255)
-	strokeWeight(8);
-	stroke(79, 70, 80)
-	fill(150, 20, 20);
-	ellipse(zombiex, 50, 80,80);
-	fill(200, 200, 15);
-	ellipse(zombie2, 70, 80, 80);
-	zombiex = zombiex + 1; 
-	zombie2 = zombie2 + 6; 
-if (zombie2 >= 800 ) {
-	zombie2 = 0; 
+	background(backgroundColor);
+	noStroke();
+	fill(zombieColor);
+	ellipse( windowWidth / 2, zombieY, zombiesize, zombiesize);
+	zombieY += zombieV;
+	zombieV += zombieA;
+	if (zombieY + (zombiesize / 2) >= windowHeight) {
+		zombieV = -10;
 	}
-if (zombiex >= 400 ) {
-	zombiex = zombiex - 1; 
 }
-if (zombiex <= 10 ) {
-	zombiex = zombiex + 1;
-}
-	}
+
+
+
 
