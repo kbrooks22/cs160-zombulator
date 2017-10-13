@@ -11,7 +11,19 @@ var zombieY2 = 90;
 var zombieV2 = 0;
 var zombieA2 = .15;
 
-var backgroundColor; 
+var backgroundColor;
+
+var rougeY = 300;
+var rougeX = 600;
+var rougeYV = 2;
+var rougeXV = -3.7;
+var rougeSize;
+var rougeColor;
+
+var rougeY2 = 200;
+var rougeX2 = 50;
+var rougeY2V = -2.3;
+var rougeX2V = 4;
 
 var humanY = 550;
 var humanColor;
@@ -29,6 +41,8 @@ function setup() {
 	backgroundColor = color(random(255), random(255), random(255));
 	zombieColor = color(255, 255, 255);
 	humanColor = color(random(255), random(255), random(255));
+	rougeSize = random(20, 100);
+	rougeColor = color(random(140), random(255), random(199));
 }
 
 function draw() {
@@ -43,7 +57,10 @@ function draw() {
 	moveHuman();
 	drawHuman2();
 	moveHuman2();
-
+	drawRouge();
+	moveRouge();
+	drawRouge2();
+	moveRouge2();
 	}
 
 function drawZombie() {
@@ -69,10 +86,11 @@ function moveZombie2() {
 	zombieY2 += zombieV2;
 	zombieV2 += zombieA2;
 	if (zombieY2 + (zombiesize / 2) >= humanY2 - (humanSize / 2)) {
-	 	zombieV2 = zombieV2 * -1.1;
+	 	zombieV2 = zombieV2 * -1;
  }
     if (zombieY2 - (zombiesize / 2) <= windowHeight * 0) {
- 	 	zombieV2 = zombieV2 * -1;
+ 	 	zombieY2 = windowHeight * 0 + (zombiesize / 2);
+ 	 	zombieV2 = zombieV2 * -.9;
  }
 }
 
@@ -101,10 +119,70 @@ function moveHuman2() {
 	humanY2 -= humanV2;
 	humanV2 += humanA2;
 	if (humanY2 - (humanSize / 2) <= zombieY2 + (zombiesize / 2)) {
-		humanV2 = humanV2 * -1.2;
+		humanV2 = humanV2 * -1;
 	 }
 	if (humanY2 + (humanSize / 2) >= windowHeight) {
 		humanV2 = humanV2 * - .7;
 		humanY2 = windowHeight - (humanSize /2); 
 	}
 }
+
+function drawRouge() {
+	fill(rougeColor);
+	ellipse(rougeX, rougeY, rougeSize, rougeSize);
+}
+
+function moveRouge() {
+	rougeX += rougeXV;
+	rougeY += rougeYV;
+	if (rougeX + (rougeSize / 2) >= windowWidth) {
+		rougeXV *= -1;
+	}
+	if (rougeX - (rougeSize / 2) <= windowWidth * 0) {
+		rougeXV *= -1;
+	}
+	if (rougeY + (rougeSize / 2) >= windowHeight ) {
+		rougeYV *= -1;
+	}
+	if(rougeY - (rougeSize / 2) <= windowHeight * 0) {
+		rougeYV *= -1;
+	}
+}
+
+function drawRouge2() {
+	fill(rougeColor);
+	ellipse(rougeX2, rougeY2, rougeSize, rougeSize);
+}
+
+function moveRouge2() {             
+	rougeX2 += rougeX2V;
+	rougeY2 += rougeY2V;
+	if (rougeX2 + (rougeSize / 2) >= windowWidth) {
+		rougeX2V *= -1;
+	}
+	if (rougeX2 - (rougeSize / 2) <= windowWidth * 0) {
+		rougeX2V *= -1;
+	}
+	if (rougeY2 + (rougeSize / 2) >= windowHeight ) {
+		rougeY2V *= -1;
+	}
+	if(rougeY2 - (rougeSize / 2) <= windowHeight * 0) {
+		rougeY2V *= -1;
+	}
+
+	// if (rougeX2 + (rougeSize / 2) = (rougeX - (rougeSize / 2)) {
+		// rougeX2V *= -1;
+	 // }
+
+	// if (rougeX2 - (rougeSize / 2) = rougeX  + (rougeSize / 2)) {
+		// rougeX2V *= -1;
+	// }
+	// if (rougeY2 + (rougeSize / 2) >= rougeY - (rougeSize / 2) {
+		// rougeY2V *= -1;
+	// }
+	// if (rougeY2 - (rougeSize / 2) <= rougeY + (rougeSize / 2)) {
+		// rougeY2V *= -1;
+	// }
+
+}
+	
