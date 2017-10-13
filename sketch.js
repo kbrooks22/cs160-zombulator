@@ -7,7 +7,7 @@ var zombieDamping = -0.8;
 var zombieColor;
 var zombiesize = 80;
 
-var zombieY2 = 10;
+var zombieY2 = 90;
 var zombieV2 = 0;
 var zombieA2 = .15;
 
@@ -44,22 +44,6 @@ function draw() {
 	drawHuman2();
 	moveHuman2();
 
-	// fill(zombieColor);
-	// ellipse( windowWidth / 3, zombieY2, zombiesize, zombiesize);
-	// fill(humanColor);
-	// ellipse( windowWidth / 3, humanY2, humanSize, humanSize);
-	// humanY2 -= humanV2;
-	// humanV2 += humanA2;
-	// zombieY2 += zombieV2;
-	// zombieV2 += zombieA2;
-	// humanY -= humanV;
-	// humanV += humanA;
-	// if (humanY2 - (humanSize / 2) <= zombieY2) {
-		// humanV2 *= humanDamping;
-	 // }
-	// if (zombieY2 + (zombiesize / 2) >= humanY2) {
-	 	// zombieV2 = zombieV * -.8;
- // }
 	}
 
 function drawZombie() {
@@ -84,8 +68,11 @@ function drawZombie2() {
 function moveZombie2() {
 	zombieY2 += zombieV2;
 	zombieV2 += zombieA2;
-	if (zombieY2 + (zombiesize / 2) >= humanY2) {
-	 	zombieV2 = zombieV * -.8;
+	if (zombieY2 + (zombiesize / 2) >= humanY2 - (humanSize / 2)) {
+	 	zombieV2 = zombieV2 * -1.1;
+ }
+    if (zombieY2 - (zombiesize / 2) <= windowHeight * 0) {
+ 	 	zombieV2 = zombieV2 * -1;
  }
 }
 
@@ -107,13 +94,17 @@ function moveHuman() {
 
 function drawHuman2 () {
 	fill(humanColor);
-	ellipse( windowWidth / 3, humanY2, humanSize, humanSize);
+	ellipse( windowWidth / 3, humanY2, humanSize + 20, humanSize + 20);
 }
 
 function moveHuman2() {
 	humanY2 -= humanV2;
 	humanV2 += humanA2;
-	if (humanY2 - (humanSize / 2) <= zombieY2) {
-		humanV2 *= humanDamping;
+	if (humanY2 - (humanSize / 2) <= zombieY2 + (zombiesize / 2)) {
+		humanV2 = humanV2 * -1.2;
 	 }
+	if (humanY2 + (humanSize / 2) >= windowHeight) {
+		humanV2 = humanV2 * - .7;
+		humanY2 = windowHeight - (humanSize /2); 
+	}
 }
