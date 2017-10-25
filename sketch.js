@@ -2,26 +2,14 @@
 
 var backgroundColor;
 
-<<<<<<< HEAD
-const MIN_SIZE = 25; // old browser? change to var.
-const MAX_SIZE = 100;
-const Number_Of_Zombies = 10;
-const Number_Of_Humans = 10;
-=======
-var zombieY2 = 90;
-var zombieV2 = 0;
-var zombieA2 = .15;
->>>>>>> a15fbd1... Balls bounce off eachother and wall until speed is to great
+const MIN_SIZE = 25; 
+const MAX_SIZE = 50;
+const Number_Of_Zombies = 100;
+const Number_Of_Humans = 100;
 
-var zombiesX;
-var zombiesY;
-var zombieSizes;
-var zombieColors;
+var zombies;
 
-var humansX;
-var humansY;
-var humanSizes;
-var humanColors;
+var humans;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -34,79 +22,77 @@ function draw() {
   background(backgroundColor);
   noStroke();
 
-<<<<<<< HEAD
   drawZombies();
   drawHumans();
-=======
-	}
->>>>>>> a15fbd1... Balls bounce off eachother and wall until speed is to great
 
 }
 
 function initializeZombies() {
-zombiesX = [];
-zombiesY = [];
-zombieSizes = [];
-zombieColors = [];
+zombies = [];
 for (var i = 0; i < Number_Of_Zombies; ++i) {
-  zombiesX[i] = random(0, windowWidth);
-  zombiesY[i] = random(0, 200);
-  zombieSizes[i] = random(MIN_SIZE, MAX_SIZE);
-  zombieColors[i] = color(random(0, 150), random(0, 255), random(0, 255), 150);
-}
+  initializeZombie(i);
+  }
 }
 
-<<<<<<< HEAD
-function initializeHumans() {
- humansX = [];
- humansY = [];
- humanSizes = [];
- humanColors = [];
- for (var i = 0.; i < Number_Of_Humans; ++i) {
-   humansX[i] = random(0, windowWidth);
-   humansY[i] = random(400, 500);
-   humanSizes[i] = random(MIN_SIZE, MAX_SIZE);
-   humanColors[i] = color(random(150, 255), random( 150, 255), random(150, 255),150);   }
-=======
-function moveZombie2() {
-	zombieY2 += zombieV2;
-	zombieV2 += zombieA2;
-	if (zombieY2 + (zombiesize / 2) >= humanY2 - (humanSize / 2)) {
-	 	zombieV2 = zombieV2 * -1.1;
- }
-    if (zombieY2 - (zombiesize / 2) <= windowHeight * 0) {
- 	 	zombieV2 = zombieV2 * -1;
->>>>>>> a15fbd1... Balls bounce off eachother and wall until speed is to great
- }
+
+function initializeZombie(index) {
+  zombies[index] = {
+  	x: random(0, windowWidth),
+  	y: random(0, 200),
+  	size: random(MIN_SIZE, MAX_SIZE),
+  	color: color(random(0, 150), random(0, 255), random(0, 255), 150)
+  };
+}
 
 function drawZombies() {
 for (var i = 0; i <Number_Of_Zombies; ++i) {
-  fill(zombieColors[i]);
-  ellipse(zombiesX[i], zombiesY[i], zombieSizes[i], zombieSizes[i]);
+	drawZombie(i);
 }
 }
 
-<<<<<<< HEAD
+function drawZombie(index) {
+var zombie = zombies[index];
+    fill(zombie.color);
+    ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
+}
+
+function moveZombies() {
+for (var i = 0; i < Number_Of_Zombies; ++i) {
+	moveZombie(i);
+}
+}
+
+function moveZombie(index) {
+var	zombie = zombies[index];
+	zombie.x = zombie.x + .2;
+
+}
+
+function initializeHumans() {
+   humans = [];
+ for (var i = 0; i < Number_Of_Humans; ++i) {
+	initializeHuman(i);
+ }
+ }
+
+ function initializeHuman (index) {
+ 	humans[index] = {
+ 	x:random(0, windowWidth),
+ 	y:random(400, 500),
+ 	size:random(MIN_SIZE, MAX_SIZE),
+ 	color:color(random(255), random( 150, 255), random(150, 255), 150)
+    };
+ }
+
+
 function drawHumans() {
 for (var i = 0; i <Number_Of_Humans; ++i) {
-  fill(humanColors[i]);
-  ellipse(humansX[i], humansY[i], humanSizes[i], humanSizes[i]);
+	drawHuman(i);
 }
-=======
-function drawHuman2 () {
-	fill(humanColor);
-	ellipse( windowWidth / 3, humanY2, humanSize + 20, humanSize + 20);
 }
 
-function moveHuman2() {
-	humanY2 -= humanV2;
-	humanV2 += humanA2;
-	if (humanY2 - (humanSize / 2) <= zombieY2 + (zombiesize / 2)) {
-		humanV2 = humanV2 * -1.2;
-	 }
-	if (humanY2 + (humanSize / 2) >= windowHeight) {
-		humanV2 = humanV2 * - .7;
-		humanY2 = windowHeight - (humanSize /2); 
-	}
->>>>>>> a15fbd1... Balls bounce off eachother and wall until speed is to great
-}
+function drawHuman(index) {
+var human = humans[index];
+    fill(human.color);
+    ellipse(human.x, human.y, human.size, human.size);
+ }
