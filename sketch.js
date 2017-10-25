@@ -24,7 +24,7 @@ function draw() {
 
   drawZombies();
   drawHumans();
-
+  moveHumans();
 }
 
 function initializeZombies() {
@@ -56,17 +56,6 @@ var zombie = zombies[index];
     ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
 }
 
-function moveZombies() {
-for (var i = 0; i < Number_Of_Zombies; ++i) {
-	moveZombie(i);
-}
-}
-
-function moveZombie(index) {
-var	zombie = zombies[index];
-	zombie.x = zombie.x + .2;
-
-}
 
 function initializeHumans() {
    humans = [];
@@ -80,19 +69,30 @@ function initializeHumans() {
  	x:random(0, windowWidth),
  	y:random(400, 500),
  	size:random(MIN_SIZE, MAX_SIZE),
- 	color:color(random(255), random( 150, 255), random(150, 255), 150)
+ 	color:color(random(255), random( 150, 255), random(150, 255), 150),
+ 	speed: random(.25, 1.1)
     };
  }
 
 
 function drawHumans() {
 for (var i = 0; i <Number_Of_Humans; ++i) {
-	drawHuman(i);
+	drawHuman(humans[i]);
 }
 }
 
-function drawHuman(index) {
-var human = humans[index];
+function drawHuman(human) {
     fill(human.color);
     ellipse(human.x, human.y, human.size, human.size);
  }
+
+function moveHumans() {
+for (var i = 0; i <Number_Of_Humans; ++i) {
+	moveHuman(humans[i]);
+} 
+  }
+
+function moveHuman(human) {
+  human.y -= human.speed;
+  human.x -= random(-1, .9);
+}
