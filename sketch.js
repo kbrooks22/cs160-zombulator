@@ -70,8 +70,8 @@ function initializeHumans() {
  	y:random(400, 500),
  	size:random(MIN_SIZE, MAX_SIZE),
  	color:color(random(255), random( 150, 255), random(150, 255), 150),
- 	speed: random(.25, 1.1)
-    };
+ 	speed: 0.1,
+   };
  }
 
 
@@ -93,6 +93,15 @@ for (var i = 0; i <Number_Of_Humans; ++i) {
   }
 
 function moveHuman(human) {
-  human.y -= human.speed;
-  human.x -= random(-1, .9);
+var VY = human.y + human.speed;
+var NY = noise(VY);
+var VX = human.x + human.speed;
+var NX = noise(VX);
+human.y -= NY;
+human.x += NX;
+if (human.x >= initializeHuman)
+ NX *= -1;
+  else(human.x <= human.x + 0.1)
+    NX *= -1;
+
 }
