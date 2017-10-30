@@ -1,4 +1,5 @@
 // Zombulator by Kai Brooks
+// Water Life
 
 var backgroundColor;
 
@@ -95,13 +96,13 @@ for (var i = 0; i <Number_Of_Humans; ++i) {
 function moveHuman(human) {
 var VY = human.y + human.speed;
 var NY = noise(VY);
-var VX = human.x + human.speed;
-var NX = noise(VX);
+// var VX = human.x + human.speed;
+// var NX = noise(VX);
 human.y -= NY;
-human.x += NX;
-if (human.x >= initializeHuman)
- NX *= -1;
-  else(human.x <= human.x + 0.1)
-    NX *= -1;
+// human.x += NX;
+// if (human.x >= initializeHuman)
+ // NX *= -1;
+  // else(human.x <= human.x + 0.1)
+    // NX *= -1;
 
 }
