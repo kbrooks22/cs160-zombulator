@@ -1,5 +1,5 @@
 // Zombulator by Kai Brooks
-// Water Life
+
 
 var backgroundColor;
 
@@ -31,78 +31,68 @@ function draw() {
 function initializeZombies() {
 zombies = [];
 for (var i = 0; i < Number_Of_Zombies; ++i) {
-  initializeZombie(i);
+  zombies[i] = initializeZombie();
   }
 }
 
 
-function initializeZombie(index) {
-  zombies[index] = {
+function initializeZombie() {  
+return{
   	x: random(0, windowWidth),
   	y: random(0, 200),
   	size: random(MIN_SIZE, MAX_SIZE),
   	color: color(random(0, 150), random(0, 255), random(0, 255), 150)
-  };
+ 	draw: function() {
+    fill(this.color);
+    ellipse(this.x, this.y, this.size, this.size);
+   };
+}
 }
 
 function drawZombies() {
-for (var i = 0; i <Number_Of_Zombies; ++i) {
-	drawZombie(i);
-}
-}
-
-function drawZombie(index) {
-var zombie = zombies[index];
-    fill(zombie.color);
-    ellipse(zombie.x, zombie.y, zombie.size, zombie.size);
-}
+ for (var i = 0; i <Number_Of_Zombies; ++i) {
+	 zombies[i].draw();
+ }
+ }
 
 
 function initializeHumans() {
    humans = [];
- for (var i = 0; i < Number_Of_Humans; ++i) {
-	initializeHuman(i);
+for (var i = 0; i < Number_Of_Humans; ++i) {
+	humans[i] = initializeHuman();
  }
  }
 
- function initializeHuman (index) {
- 	humans[index] = {
+ function initializeHuman () {
+ return{
  	x:random(0, windowWidth),
  	y:random(400, 500),
  	size:random(MIN_SIZE, MAX_SIZE),
  	color:color(random(255), random( 150, 255), random(150, 255), 150),
  	speed: 0.1,
-   };
+ 	draw: function() {
+    fill(this.color);
+    ellipse(this.x, this.y, this.size, this.size);
+   },
+    move: function() {
+    var VY = this.y + this.speed;
+    var NY = noise(VY);
+    this.y -= NY;
+
+    }
  }
+}
 
 
 function drawHumans() {
 for (var i = 0; i <Number_Of_Humans; ++i) {
-	drawHuman(humans[i]);
+	humans[i].draw();
 }
 }
-
-function drawHuman(human) {
-    fill(human.color);
-    ellipse(human.x, human.y, human.size, human.size);
- }
 
 function moveHumans() {
 for (var i = 0; i <Number_Of_Humans; ++i) {
-	moveHuman(humans[i]);
+	humans[i].move();
 } 
   }
 
-function moveHuman(human) {
-var VY = human.y + human.speed;
-var NY = noise(VY);
-// var VX = human.x + human.speed;
-// var NX = noise(VX);
-human.y -= NY;
-// human.x += NX;
-// if (human.x >= initializeHuman)
- // NX *= -1;
-  // else(human.x <= human.x + 0.1)
-    // NX *= -1;
-
-}
