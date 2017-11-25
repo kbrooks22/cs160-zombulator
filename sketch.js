@@ -22,18 +22,19 @@ function draw() {
   drawPopulation();
   movePopulation();
   drawPopulationCounts();
-  handlecollisions();
+  handleCollisions();
 }
 
-function handlecollisions() {
-for (var i = 0; i < POPULATION_SIZE; ++i) {
-	var attacker = population[i];
-	for (var j = i + 1; j < POPULATION_SIZE; ++j)
-		var target = population[i];
-	if (attacker.isZombie() && target.isHuman() && attacker.isTouching(target))  {
-		print("FIGHT!, FIGHT!, FIGHT!");
-	}
-}
+function handleCollisions() {
+  for(var i = 0; i < POPULATION_SIZE; ++i) {
+    var attacker = population[i];
+    for (var j = i + 1; j < POPULATION_SIZE; ++j) {
+      var target = population[j];
+      if (attacker.isTouching(target)) {
+        print("Fight! Fight! Fight!");
+      }
+    }
+  }
 }
 
 function initializePopulation() {
@@ -71,6 +72,7 @@ function movePopulation() {
 
 function initializeZombie() {
   return {
+    humanoid_type: "zombie",
     x: random(0, windowWidth),
     y: random(0, 200),
     speed: random(0.25, 3),
@@ -91,12 +93,24 @@ function initializeZombie() {
     draw: function() {
       fill(this.color);
       ellipse(this.x, this.y, this.size, this.size);
+    },
+    isTouching: function(target) {
+      if (this.humanoid_type == target.humanoid_type) return false;
+      var distance = dist(this.x, this.y, target.x, target. y);
+      if (distance <= (this.size/2 + target.size/2)) {
+        return true;
+      }
+      else {
+        return false;
+      }
+
     }
   };
 }
 
 function initializeHuman() {
   return {
+    humanoid_type: "human",
     x: random(0, windowWidth),
     y: random(windowHeight - 200, windowHeight),
     speed: random(0.25, 3),
@@ -118,7 +132,15 @@ function initializeHuman() {
         fill(this.color);
         ellipse(this.x, this.y, this.size, this.size);
     },
-    isTouching: function() {
-    	}
-  };
-}
+    isTouching: function(target) {
+    if (this.humanoid_type == target.humanoid_type) return false;
+    var distance = dist(this.x, this.y, target.x, target. y);
+    if (distance <= (this.size/2 + target.size/2)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+    }
+  }
+};
