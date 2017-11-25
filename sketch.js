@@ -3,7 +3,7 @@ var backgroundColor;
 
 const MIN_SIZE = 5;
 const MAX_SIZE = 50;
-const POPULATION_SIZE = 500;
+const POPULATION_SIZE = 100;
 
 var population = [];
 
@@ -31,7 +31,8 @@ function handleCollisions() {
     for (var j = i + 1; j < POPULATION_SIZE; ++j) {
       var target = population[j];
       if (attacker.isTouching(target)) {
-        print("Fight! Fight! Fight!");
+        // print("Fight! Fight! Fight!");
+        target.isDestroyed();
       }
     }
   }
@@ -104,9 +105,14 @@ function initializeZombie() {
         return false;
       }
 
+    },
+    isDestroyed: function() {
+      this.size *= 0;
     }
-  };
+  }
+  
 }
+
 
 function initializeHuman() {
   return {
@@ -141,6 +147,9 @@ function initializeHuman() {
     else {
       return false;
     }
+    },
+    isDestroyed: function() {
+      this.size *= 0;
     }
   }
 };
