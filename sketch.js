@@ -15,6 +15,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color(245, 255, 245);
   initializePopulation();
+  loadImage(www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg);
 }
 
 function draw() {
@@ -77,21 +78,25 @@ function handleCollisions() {
 }
 
 function declareWinner() {
+// var img;
+// function preload() {
+//   img = loadImage(www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg);
+// }
 if (humanCount < 10) {
   text("ZOMBIESWIN", width / 2, height / 2);
 } else if (humanCount -15 > zombieCount) {
   text("HUMANSWIN", width /2, height / 2);
-  fill(0, 0, 0, 0)
-  rect(width / 2, height / 2, 500, 100);
+  // fill(0, 0, 0, 0)
+  // rect(width / 2, height / 2, 500, 100);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && humanCount > zombieCount) {
    text("HUMANSWIN", width /2, height / 2);
-    fill(0, 0, 0, 0)
-    rect(width / 2, height / 2, 500, 100);
+    // fill(0, 0, 0, 0)
+    // rect(width / 2, height / 2, 500, 100);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && zombieCount > humanCount){
     text("ZOMBIESWIN", width / 2, height / 2);
-    fill(0, 0, 0, 0)
-    filltext();
-    rect(width / 2, height / 2, 500, 100);
+    image(img, width /2, height / 3);
+    // fill(0, 0, 0, 0)
+    // rect(width / 2, height / 2, 500, 100);
 
 
 }
