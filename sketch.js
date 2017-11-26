@@ -1,5 +1,5 @@
 // Zombulator by Kai Brooks
-
+// Program works as zombie outbreak simulator. Zombies and humans fight, all have various strengths. Humans can change into zombies, victory is declared once total population count is under 75%.
 var backgroundColor;
 var img;
 
