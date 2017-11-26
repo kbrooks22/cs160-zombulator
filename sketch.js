@@ -1,9 +1,10 @@
 // Zombulator by Kai Brooks
+
 var backgroundColor;
 
 const MIN_SIZE = 5;
 const MAX_SIZE = 50;
-const POPULATION_SIZE = 100;
+const POPULATION_SIZE = 50;
 
 var population = [];
 
@@ -25,18 +26,6 @@ function draw() {
   handleCollisions();
 }
 
-function handleCollisions() {
-  for(var i = 0; i < POPULATION_SIZE; ++i) {
-    var attacker = population[i];
-    for (var j = i + 1; j < POPULATION_SIZE; ++j) {
-      var target = population[j];
-      if (attacker.isTouching(target)) {
-        // print("Fight! Fight! Fight!");
-        target.isDestroyed();
-      }
-    }
-  }
-}
 
 function initializePopulation() {
   for (var i = 0; i < POPULATION_SIZE; ++i) {
@@ -71,14 +60,27 @@ function movePopulation() {
   }
 }
 
+function handleCollisions() {
+  for(var i = 0; i < POPULATION_SIZE; ++i) {
+    var attacker = population[i];
+    for (var j = i + 1; j < POPULATION_SIZE; ++j) {
+      var target = population[j];
+      if (attacker.isTouching(target)) {
+        attacker.isAttacking(target);
+    }
+  }
+}
+}
+
 function initializeZombie() {
   return {
     humanoid_type: "zombie",
     x: random(0, windowWidth),
     y: random(0, 200),
     speed: random(0.25, 3),
-    size: random(MIN_SIZE, MAX_SIZE),
+    size: random(MIN_SIZE * 1.2, MAX_SIZE),
     color: color(random(100, 255), random(50, 150), random(50, 150), 150),
+    attack: random(0, this.size),
     move: function() {
       var direction = random(0, 100);
       if (direction < 20) {
@@ -106,12 +108,21 @@ function initializeZombie() {
       }
 
     },
-    isDestroyed: function() {
-      this.size *= 0;
-    }
+  isAttacking: function(target) {
+  if (this.attack >= target.attack && target.resistance < 4) {
+    target.humanoid_type = "zombie";
+    target.color = this.color;
+    ++zombieCount
+    } else if(this.attack >= target.attack){
+    delete target.size;
+    --humanCount;
+  } else {
+    delete this.size;
+    --zombieCount;
   }
-  
+  }
 }
+};
 
 
 function initializeHuman() {
@@ -122,6 +133,7 @@ function initializeHuman() {
     speed: random(0.25, 3),
     size: random(MIN_SIZE, MAX_SIZE),
     color: color(random(50, 150), random(50, 150), random(150, 255), 150),
+    attack: random(0, this.size),
     move: function() {
         var direction = random(0, 100);
         if (direction < 20) {
@@ -148,8 +160,20 @@ function initializeHuman() {
       return false;
     }
     },
-    isDestroyed: function() {
-      this.size *= 0;
+    isAttacking: function(target) {
+    var resistance = random(10);
+    if (this.attack >= target.attack) {
+      delete target.size;
+      zombieCount = zombieCount - 1;
+    } else if (resistance < 4){
+        humanoid_type = "zombie";
+        this.color = target.color;
+        ++zombieCount;
+      } else {
+      delete this.size;
+      --humanCount;
+    }
     }
   }
 };
+
