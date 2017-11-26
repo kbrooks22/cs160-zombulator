@@ -1,6 +1,7 @@
 // Zombulator by Kai Brooks
 
 var backgroundColor;
+var img;
 
 const MIN_SIZE = 5;
 const MAX_SIZE = 50;
@@ -11,11 +12,14 @@ var population = [];
 var zombieCount = 0;
 var humanCount = 0;
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color(245, 255, 245);
   initializePopulation();
-  loadImage(www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg);
+  loadimage("https://www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg", function(img) {
+    image(img,0,0)
+  });
 }
 
 function draw() {
@@ -78,10 +82,6 @@ function handleCollisions() {
 }
 
 function declareWinner() {
-// var img;
-// function preload() {
-//   img = loadImage(www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg);
-// }
 if (humanCount < 10) {
   text("ZOMBIESWIN", width / 2, height / 2);
 } else if (humanCount -15 > zombieCount) {
@@ -94,13 +94,15 @@ if (humanCount < 10) {
     // rect(width / 2, height / 2, 500, 100);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && zombieCount > humanCount){
     text("ZOMBIESWIN", width / 2, height / 2);
-    image(img, width /2, height / 3);
+    image(img, 0, 0);
+    // image("zombie.jpg");
     // fill(0, 0, 0, 0)
     // rect(width / 2, height / 2, 500, 100);
-
-
 }
 }
+
+
+
 function initializeZombie() {
   return {
     humanoid_type: "zombie",
