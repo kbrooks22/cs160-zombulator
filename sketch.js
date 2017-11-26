@@ -17,9 +17,6 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   backgroundColor = color(245, 255, 245);
   initializePopulation();
-  loadimage("https://www.stealingshare.com/wp-content/uploads/2017/01/Zombie.jpg", function(img) {
-    image(img,0,0)
-  });
 }
 
 function draw() {
@@ -64,9 +61,6 @@ function movePopulation() {
   for (var i = 0; i < POPULATION_SIZE; ++i) {
     population[i].move();
   }
-  // if (population[i].y >= windowHeight || population[i].y <= windowHeight * 0 ) {
-  //   population[i].speed *= -1;
-  // }
 }
 
 function handleCollisions() {
@@ -86,18 +80,11 @@ if (humanCount < 10) {
   text("ZOMBIESWIN", width / 2, height / 2);
 } else if (humanCount -15 > zombieCount) {
   text("HUMANSWIN", width /2, height / 2);
-  // fill(0, 0, 0, 0)
-  // rect(width / 2, height / 2, 500, 100);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && humanCount > zombieCount) {
    text("HUMANSWIN", width /2, height / 2);
-    // fill(0, 0, 0, 0)
-    // rect(width / 2, height / 2, 500, 100);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && zombieCount > humanCount){
     text("ZOMBIESWIN", width / 2, height / 2);
     image(img, 0, 0);
-    // image("zombie.jpg");
-    // fill(0, 0, 0, 0)
-    // rect(width / 2, height / 2, 500, 100);
 }
 }
 
@@ -176,19 +163,6 @@ function initializeHuman() {
         } else {
           this.y -= this.speed;
         }
-        // if (this.y >= windowHeight) {
-          // direction = random(0,100);
-          // this.speed *= -1;
-      //   if (direction < 20) {
-      //   this.x += this.speed;
-      // } else if (direction < 40) {
-      //   this.x -= this.speed;
-      // } else if (direction < 60) {
-      //   this.y -= this.speed;
-      // } else {
-      //   this.y += this.speed;
-      // }
-        
       },
     draw: function() {
         fill(this.color);
