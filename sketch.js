@@ -77,14 +77,14 @@ function handleCollisions() {
 
 
 function declareWinner() {
-if (zombieCount * .85 > humanCount) {
+if (zombieCount * .75 > humanCount && (zombieCount + humanCount) <= POPULATION_SIZE * .75) {
   text("ZOMBIESWIN", width / 2, height / 2);
-} else if (humanCount * .85 > zombieCount) {
+} else if (humanCount * .75 > zombieCount && (zombieCount + humanCount) <= POPULATION_SIZE * .75) {
   text("HUMANSWIN", width /2, height / 2);
-} else if (zombieCount + humanCount < POPULATION_SIZE * .75 && humanCount > zombieCount) {
+} else if (zombieCount + humanCount < POPULATION_SIZE * .6 && humanCount > zombieCount) {
  text("HUMANSWIN", width /2, height / 2);
 
-} else if (zombieCount + humanCount < POPULATION_SIZE * .75 && zombieCount > humanCount){
+} else if (zombieCount + humanCount < POPULATION_SIZE * .6 && zombieCount > humanCount){
   text("ZOMBIESWIN", width / 2, height / 2);
 }
 }
