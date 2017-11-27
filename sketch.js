@@ -77,9 +77,9 @@ function handleCollisions() {
 
 
 function declareWinner() {
-if (humanCount < 10) {
+if (zombieCount * .85 > humanCount) {
   text("ZOMBIESWIN", width / 2, height / 2);
-} else if (humanCount -15 > zombieCount) {
+} else if (humanCount * .85 > zombieCount) {
   text("HUMANSWIN", width /2, height / 2);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && humanCount > zombieCount) {
  text("HUMANSWIN", width /2, height / 2);
