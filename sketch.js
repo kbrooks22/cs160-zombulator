@@ -5,7 +5,7 @@ var img;
 
 const MIN_SIZE = 5;
 const MAX_SIZE = 50;
-const POPULATION_SIZE = 100;
+const POPULATION_SIZE = 200;
 
 var population = [];
 
@@ -75,16 +75,17 @@ function handleCollisions() {
 }
 }
 
+
 function declareWinner() {
 if (humanCount < 10) {
   text("ZOMBIESWIN", width / 2, height / 2);
 } else if (humanCount -15 > zombieCount) {
   text("HUMANSWIN", width /2, height / 2);
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && humanCount > zombieCount) {
-   text("HUMANSWIN", width /2, height / 2);
+ text("HUMANSWIN", width /2, height / 2);
+
 } else if (zombieCount + humanCount < POPULATION_SIZE * .75 && zombieCount > humanCount){
-    text("ZOMBIESWIN", width / 2, height / 2);
-    image(img, 0, 0);
+  text("ZOMBIESWIN", width / 2, height / 2);
 }
 }
 
